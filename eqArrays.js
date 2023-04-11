@@ -1,26 +1,19 @@
-const assertEqual = function(actual, expected) {
-  if (actual === expected) {
-    console.log(`✅ Assertion Passed: ${actual} === ${expected}`);
-  } else {
-    console.log(`🛑 Assertion Failed: ${actual} !== ${expected}`);
-  }
-};
 
 const eqArrays = function(arr1,arr2) {
-  let response = 1;
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] === arr2[i]) {
-      response *= 1;
-    } else {
-      response *= 0;
+  const value1 = arr1.length;
+  const value2 = arr2.length;
+  if (value1 !== value2) {
+    return false;
+  }
+  
+  for (const val in arr1) {
+    if (arr1[val] !== arr2[val]) {
+      return false;
     }
   }
-  return (response) ? true : false;
+
+  return true;
 };
 
-assertEqual(eqArrays([1, 2, 3], [1, 2, 3]), true); // => should PASS
 
-assertEqual(eqArrays([1, 2, 3], [3, 2, 1]), false); // => false
-
-assertEqual(eqArrays(["1", "2", "3"], ["1", "2", "3"]), true); // => true
-assertEqual(eqArrays(["1", "2", "3"], ["1", 2, "3"]), false); // => false
+module.exports = eqArrays;
